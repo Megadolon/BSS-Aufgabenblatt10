@@ -10,12 +10,12 @@ namespace BSS_Aufgabenblatt10
         {
             processes.Sort();
 
-            int deltaTime = 0;
+            int tick = 0;
             int readyTimes = 0;
             foreach (var process in processes)
             {
-                deltaTime += process.executionTime_;
-                process.readyTime_ = deltaTime;
+                tick += process.executionTime_;
+                process.readyTime_ = tick;
                 readyTimes += process.readyTime_;
             }
 

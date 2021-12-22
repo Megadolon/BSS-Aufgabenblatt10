@@ -6,11 +6,11 @@ namespace BSS_Aufgabenblatt10
 {
     class Process : IComparable<Process>
     {
-        public Process(int executionTime)
+        public Process(int executionTime, int deadline, int readyTime = 0)
         {
             executionTime_ = executionTime;
-            readyTime_ = 0;
-            deadline_ = -1;
+            readyTime_ = readyTime;
+            deadline_ = deadline;
         }
         public int executionTime_;
         public int readyTime_;
@@ -18,7 +18,7 @@ namespace BSS_Aufgabenblatt10
 
         public int CompareTo(Process other)
         {
-            if (other.executionTime_ <= this.executionTime_)
+            if (this.executionTime_ > other.executionTime_)
                 return 1;
             else
                 return -1;
