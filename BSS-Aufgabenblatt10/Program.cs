@@ -18,10 +18,11 @@ namespace BSS_Aufgabenblatt10
 
 
             IScheduler scheduler;
-            scheduler = new ShortestJobFirst();
+
             scheduler = new FirstComeFirstServe();
             SolveAndShow(new List<Process>(processes), scheduler);
-
+            
+            scheduler = new ShortestJobFirst();
             SolveAndShow(new List<Process>(processes), scheduler);
 
             scheduler = new EarliestDeadlineFirst();
