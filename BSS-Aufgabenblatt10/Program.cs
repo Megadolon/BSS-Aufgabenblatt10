@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace BSS_Aufgabenblatt10
 {
@@ -15,32 +16,46 @@ namespace BSS_Aufgabenblatt10
             processes.Add(new Process(5, 15, 4));
             processes.Add(new Process(8, 8, 4));
 
-            PrintProcesses(processes);
+
             IScheduler scheduler;
-            scheduler = new EDF();
-            Console.WriteLine("Wait Time" + scheduler.Solve(processes));
-            PrintProcesses(processes);
+            scheduler = new ShortestJobFirst();
+            scheduler = new FirstComeFirstServe();
+            SolveAndShow(new List<Process>(processes), scheduler);
 
-            //aufgabe 2
-            //Console.WriteLine("Aufgabe 2:");
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    scheduler = new RoundRobin(i);
-            //    Console.WriteLine("Wait Time: " + scheduler.Solve(processes));
-            //}
-            //PrintProcesses(processes);
+            SolveAndShow(new List<Process>(processes), scheduler);
 
+            scheduler = new EarliestDeadlineFirst();
+            SolveAndShow(new List<Process>(processes), scheduler);
+
+            scheduler = new LeastLaxityFirst();
+            SolveAndShow(new List<Process>(processes), scheduler);
+
+            scheduler = new RoundRobin(3);
+            SolveAndShow(new List<Process>(processes), scheduler);
+
+            scheduler = new PreemptiveShortestJobFirst();
+            SolveAndShow(new List<Process>(processes), scheduler);
+
+            scheduler = new NonPreemptiveShortestJobFirst();
+            SolveAndShow(new List<Process>(processes), scheduler);
+
+            # region aufgabe 2
+            Console.WriteLine("Aufgabe 2:");
+            for (int i = 1; i < 10; i++)
+            {
+                scheduler = new RoundRobin(i);
+                Console.WriteLine(scheduler.GetType().Name + " " + i);
+                Console.WriteLine("Wait Times: " + scheduler.Solve(new List<Process>(processes)));
+                Console.WriteLine("");
+            }
+            #endregion
         }
 
-        private static void PrintProcesses(List<Process> processes)
+        private static void SolveAndShow(List<Process> processes, IScheduler scheduler)
         {
-            processes.ForEach(p =>
-            {
-                Console.WriteLine("Execution Time   : " + p.executionTime_.ToString());
-                Console.WriteLine("Ready Time       : " + p.readyTime_.ToString());
-                Console.WriteLine("Deadline Time    : " + p.deadline_.ToString());
-                Console.WriteLine("----------------------------------------------");
-            });
+            Console.WriteLine(scheduler.GetType().Name);
+            Console.WriteLine("Wait Times: " + scheduler.Solve(processes));
+            Console.WriteLine("");
         }
     }
 }

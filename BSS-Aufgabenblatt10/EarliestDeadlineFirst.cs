@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BSS_Aufgabenblatt10
 {
-    class EDF : IScheduler
+    class EarliestDeadlineFirst : IScheduler
     {
         public double Solve(List<Process> processes)
         {
@@ -20,8 +20,8 @@ namespace BSS_Aufgabenblatt10
             foreach (var process in processes)
             {
                 tick += process.executionTime_;
-                process.readyTime_ = tick;
-                readyTimes += process.readyTime_;
+                process.waitTime_ = tick;
+                readyTimes += tick;
             }
 
             return readyTimes / (double)processes.Count;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BSS_Aufgabenblatt10
 {
-    class PSJF : IScheduler
+    class PreemptiveShortestJobFirst : IScheduler
     {
         struct Task : IComparable<Task>
         {
@@ -56,25 +56,19 @@ namespace BSS_Aufgabenblatt10
                     }
                     else break;
                 }
-                //aktive prozesse anzeigen
-                Console.WriteLine($"-------time: {tick}");
-                tasks.ForEach(t => {
-                    Console.WriteLine($"execTime: {t.executionTime_} processID {t.processId_}");
-                });
-                Console.WriteLine("");
-
                 //prozesse bearbeiten
                 tick++;
                 if (tasks.Count > 0)
                 {
                     //Sortierfunktion unterscheided PSJF von NPSJF, da hier kürzere Prozesse zuerst bearbeitet werden
                     tasks.Sort();
+
                     tasks[0] = new Task(tasks[0].executionTime_ - 1, tasks[0].processId_);
                     if (tasks[0].executionTime_ == 0)
                     {
                         int tickWithReadyOffset = tick - processes[tasks[0].processId_].readyTime_;
                         readyTimes += tickWithReadyOffset;
-                        processes[tasks[0].processId_].readyTime_ = tickWithReadyOffset;
+                        processes[tasks[0].processId_].waitTime_ = tickWithReadyOffset;
                         tasks.RemoveAt(0);
                     }
                 }

@@ -4,16 +4,18 @@ using System.Text;
 
 namespace BSS_Aufgabenblatt10
 {
-    class FCFS : IScheduler
+    class ShortestJobFirst : IScheduler
     {
         public double Solve(List<Process> processes)
         {
+            processes.Sort();
+
             int tick = 0;
             int readyTimes = 0;
             foreach (var process in processes)
             {
                 tick += process.executionTime_;
-                process.readyTime_ = tick;
+                process.waitTime_ = tick;
                 readyTimes += tick;
             }
 

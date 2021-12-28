@@ -11,10 +11,12 @@ namespace BSS_Aufgabenblatt10
             executionTime_ = executionTime;
             readyTime_ = readyTime;
             deadline_ = deadline;
+            waitTime_ = -1;
         }
         public int executionTime_;
         public int readyTime_;
         public int deadline_;
+        public int waitTime_;
 
         public int CompareTo(Process other)
         {

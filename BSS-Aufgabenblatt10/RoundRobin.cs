@@ -16,7 +16,8 @@ namespace BSS_Aufgabenblatt10
         {
             int[] restTimes = new int[processes.Count];
             int counter = 0;
-            processes.ForEach(p => {
+            processes.ForEach(p =>
+            {
                 restTimes[counter++] = p.executionTime_;
             });
 
@@ -31,11 +32,11 @@ namespace BSS_Aufgabenblatt10
                 {
                     if (restTimes[i] <= 0) continue;
 
-                    if(restTimes[i] <= quantum_)
+                    if (restTimes[i] <= quantum_)
                     {
                         tick += restTimes[i];
                         restTimes[i] = 0;
-                        processes[i].readyTime_ = tick;
+                        processes[i].waitTime_ = tick;
                         readyTimes += tick;
                     }
                     else
