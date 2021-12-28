@@ -34,12 +34,6 @@ namespace BSS_Aufgabenblatt10
             scheduler = new RoundRobin(3);
             SolveAndShow(new List<Process>(processes), scheduler);
 
-            scheduler = new PreemptiveShortestJobFirst();
-            SolveAndShow(new List<Process>(processes), scheduler);
-
-            scheduler = new NonPreemptiveShortestJobFirst();
-            SolveAndShow(new List<Process>(processes), scheduler);
-
             # region aufgabe 2
             Console.WriteLine("Aufgabe 2:");
             for (int i = 1; i < 10; i++)
@@ -50,6 +44,16 @@ namespace BSS_Aufgabenblatt10
                 Console.WriteLine("");
             }
             #endregion
+                
+            # region aufgabe 3
+            scheduler = new PreemptiveShortestJobFirst();
+            SolveAndShow(new List<Process>(processes), scheduler);
+
+            scheduler = new NonPreemptiveShortestJobFirst();
+            SolveAndShow(new List<Process>(processes), scheduler);
+            Console.WriteLine("Aufgabe 2:");
+            #endregion
+                
         }
 
         private static void SolveAndShow(List<Process> processes, IScheduler scheduler)
