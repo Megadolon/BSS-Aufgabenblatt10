@@ -46,12 +46,12 @@ namespace BSS_Aufgabenblatt10
             #endregion
                 
             # region aufgabe 3
+            Console.WriteLine("Aufgabe 3:");
             scheduler = new PreemptiveShortestJobFirst();
             SolveAndShow(new List<Process>(processes), scheduler);
 
             scheduler = new NonPreemptiveShortestJobFirst();
             SolveAndShow(new List<Process>(processes), scheduler);
-            Console.WriteLine("Aufgabe 2:");
             #endregion
                 
         }
